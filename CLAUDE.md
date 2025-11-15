@@ -2,8 +2,8 @@
 
 > 이 문서는 Claude 또는 다른 AI 어시스턴트가 프로젝트 상황을 빠르게 파악하고 효과적으로 도움을 줄 수 있도록 작성되었습니다.
 
-**최종 업데이트**: 2025-11-15
-**프로젝트 상태**: 기획 완료, 개발 환경 설정 단계
+**최종 업데이트**: 2025-11-15 15:35
+**프로젝트 상태**: Phase 0 완료 - Phase 1 시작 준비 완료
 
 ---
 
@@ -44,6 +44,8 @@
 ## 📋 현재 프로젝트 상태
 
 ### 완료된 작업 ✅
+
+#### Phase 0: 초기 설정 (2025-11-15 완료)
 1. ✅ **프로젝트 기획 완료** (PROJECT_PLAN.md)
    - 5개 Phase 로드맵 (12주)
    - 무료/유료 기능 명확히 구분
@@ -56,23 +58,65 @@
    - SETUP_GUIDE.md: 개발 환경 설정 가이드
    - .gitignore: Git 제외 파일
 
-3. ✅ **개발 환경 설정 가이드 작성**
-   - 백엔드 (FastAPI + PostgreSQL)
-   - 프론트엔드 (Next.js)
-   - 데이터베이스 (TimescaleDB)
+3. ✅ **디렉토리 구조 생성**
+   - frontend/, backend/, database/, scripts/, docs/ 생성
+   - 각 디렉토리별 README.md 작성
+
+4. ✅ **백엔드 초기화 완료**
+   - FastAPI 프로젝트 구조 설정
+   - main.py, config.py, database.py 생성
+   - requirements.txt 작성 (무료 라이브러리만)
+   - .env.example 환경 변수 템플릿
+   - pytest 테스트 설정
+   - 커밋: `6131e92 - feat(backend): FastAPI 백엔드 초기 설정`
+
+5. ✅ **프론트엔드 초기화 완료**
+   - Next.js 16 + TypeScript 프로젝트 생성
+   - Tailwind CSS 4 설정
+   - React Query, Zustand, Chart.js 설치
+   - API 클라이언트 설정 (axios)
+   - 메인 페이지 구현 (백엔드 헬스 체크)
+   - 커밋: `72db8b7 - feat(frontend): Next.js 프론트엔드 초기 설정`
+
+6. ✅ **Git 저장소 설정 완료**
+   - 로컬 Git 저장소 초기화
+   - GitHub 원격 저장소 연결
+   - Repository: https://github.com/hwang-junwoo/portfoliovision
+   - 브랜치: main
+   - 총 3개 커밋 푸시 완료
 
 ### 현재 단계 📍
-**Phase 0: 초기 설정 단계**
-- 실제 디렉토리 구조 생성 필요
-- 개발 환경 초기화 필요
-- 첫 커밋 준비 중
+**Phase 1: 포트폴리오 관리 개발 시작 준비 완료**
+- ✅ 개발 환경 완전히 설정됨
+- ✅ 백엔드/프론트엔드 기본 구조 완성
+- ⏭️ 데이터베이스 스키마 설계 필요
+- ⏭️ 포트폴리오 API 개발 시작 가능
 
 ### 다음 할 일 ⏭️
-1. 디렉토리 구조 생성 (frontend, backend 폴더)
-2. 백엔드 초기화 (FastAPI 기본 설정)
-3. 프론트엔드 초기화 (Next.js 프로젝트 생성)
-4. Git 초기 커밋
-5. Phase 1 개발 시작
+
+#### Phase 1 개발 순서:
+1. **데이터베이스 설정**
+   - PostgreSQL 설치 및 연결
+   - Alembic 마이그레이션 초기화
+   - Portfolio, ETF Holdings, Transactions 테이블 스키마 설계
+
+2. **백엔드 API 개발**
+   - SQLAlchemy 모델 작성
+   - Pydantic 스키마 작성
+   - 포트폴리오 CRUD API 엔드포인트
+   - ETF 종목 관리 API
+   - 거래 내역 API
+
+3. **프론트엔드 UI 개발**
+   - 대시보드 레이아웃 구성
+   - 포트폴리오 목록/상세 페이지
+   - 거래 내역 입력 폼
+   - 차트 컴포넌트
+
+4. **통합 및 테스트**
+   - 백엔드-프론트엔드 통합
+   - API 테스트
+   - UI 테스트
 
 ---
 
@@ -107,29 +151,66 @@
 
 ```
 portfoliovision/
-├── frontend/          # Next.js (아직 생성 안 됨)
-├── backend/           # FastAPI (아직 생성 안 됨)
-├── database/          # DB 스크립트
-├── docs/              # 추가 문서
-├── scripts/           # 유틸리티 스크립트
-├── .gitignore         ✅ 생성됨
-├── README.md          ✅ 생성됨
-├── PROJECT_PLAN.md    ✅ 생성됨
-├── PROJECT_STRUCTURE.md ✅ 생성됨
-├── SETUP_GUIDE.md     ✅ 생성됨
-└── CLAUDE.md          ✅ 생성됨 (이 파일)
+├── frontend/                    ✅ Next.js 16 + TypeScript
+│   ├── src/
+│   │   ├── app/                # Next.js App Router
+│   │   │   ├── layout.tsx      # 루트 레이아웃
+│   │   │   ├── page.tsx        # 메인 페이지
+│   │   │   └── globals.css
+│   │   ├── lib/                # 유틸리티
+│   │   │   ├── api.ts          # axios API 클라이언트
+│   │   │   └── utils.ts        # Tailwind 유틸
+│   │   └── providers/
+│   │       └── query-provider.tsx  # React Query
+│   ├── package.json            # 의존성 (React Query, Zustand, Chart.js 등)
+│   └── .env.local.example
+│
+├── backend/                     ✅ FastAPI + Python
+│   ├── app/
+│   │   ├── main.py             # FastAPI 진입점
+│   │   ├── config.py           # 환경 설정
+│   │   ├── database.py         # PostgreSQL 연결
+│   │   ├── models/             # SQLAlchemy 모델 (비어있음)
+│   │   ├── schemas/            # Pydantic 스키마 (비어있음)
+│   │   ├── routers/            # API 라우터 (비어있음)
+│   │   ├── services/           # 비즈니스 로직 (비어있음)
+│   │   └── utils/              # 유틸리티 (비어있음)
+│   ├── tests/
+│   │   └── test_main.py        # 기본 테스트
+│   ├── requirements.txt        # Python 의존성
+│   └── .env.example
+│
+├── database/                    # DB 스크립트
+│   ├── migrations/             # Alembic (비어있음)
+│   └── seeds/                  # 초기 데이터 (비어있음)
+│
+├── docs/                       # 추가 문서
+├── scripts/                    # 유틸리티 스크립트
+│
+├── .gitignore                  ✅
+├── README.md                   ✅
+├── PROJECT_PLAN.md             ✅
+├── PROJECT_STRUCTURE.md        ✅
+├── SETUP_GUIDE.md              ✅
+└── CLAUDE.md                   ✅ (이 파일)
 ```
+
+### 실행 가능한 서버
+- **백엔드**: `cd backend && uvicorn app.main:app --reload` (포트 8000)
+- **프론트엔드**: `cd frontend && npm run dev` (포트 3000)
+- **API 문서**: http://localhost:8000/api/docs
 
 ---
 
 ## 🗺️ 개발 로드맵 (12주)
 
-### Phase 1: 포트폴리오 관리 (1-3주) ⬜ **← 현재 준비 단계**
-- 포트폴리오 CRUD
-- ETF 보유 종목 관리
-- 거래 내역 기록
-- 기본 대시보드 UI
+### Phase 1: 포트폴리오 관리 (1-3주) 🔄 **← 다음 단계**
+- ⏭️ 포트폴리오 CRUD
+- ⏭️ ETF 보유 종목 관리
+- ⏭️ 거래 내역 기록
+- ⏭️ 기본 대시보드 UI
 - **비용**: 무료
+- **준비 상태**: ✅ 개발 환경 완료, 바로 시작 가능
 
 ### Phase 2: 경제 뉴스 (4-5주) ⬜
 - RSS 피드 파서
