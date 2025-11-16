@@ -18,7 +18,7 @@ app = FastAPI(
 # CORS 설정
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.ALLOWED_ORIGINS,
+    allow_origins=settings.get_allowed_origins(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -45,11 +45,12 @@ async def health_check():
     }
 
 
-# 향후 라우터 추가 예시
-# from app.routers import portfolios, etfs, news
-# app.include_router(portfolios.router, prefix="/api/v1/portfolios", tags=["portfolios"])
-# app.include_router(etfs.router, prefix="/api/v1/etfs", tags=["etfs"])
-# app.include_router(news.router, prefix="/api/v1/news", tags=["news"])
+# API 라우터 등록
+from app.routers import portfolios, etf_holdings, transactions
+
+app.include_router(portfolios.router, prefix="/api/v1/portfolios", tags=["portfolios"])
+app.include_router(etf_holdings.router, prefix="/api/v1/etf-holdings", tags=["etf-holdings"])
+app.include_router(transactions.router, prefix="/api/v1/transactions", tags=["transactions"])
 
 
 if __name__ == "__main__":

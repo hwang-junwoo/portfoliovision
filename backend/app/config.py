@@ -20,10 +20,11 @@ class Settings(BaseSettings):
     ASYNC_DATABASE_URL: str = "postgresql+asyncpg://postgres:password@localhost:5432/portfoliovision"
 
     # CORS 설정
-    ALLOWED_ORIGINS: List[str] = [
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-    ]
+    ALLOWED_ORIGINS: str = "http://localhost:3000,http://127.0.0.1:3000"
+
+    def get_allowed_origins(self) -> List[str]:
+        """ALLOWED_ORIGINS를 리스트로 반환"""
+        return [origin.strip() for origin in self.ALLOWED_ORIGINS.split(",")]
 
     # API 키 (선택사항)
     ALPHA_VANTAGE_API_KEY: str | None = None
