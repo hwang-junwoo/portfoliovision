@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import api from "@/lib/api";
+import Link from "next/link";
 
 export default function Home() {
   // 백엔드 헬스 체크
@@ -76,8 +77,24 @@ export default function Home() {
           </div>
         </div>
 
+        {/* CTA 버튼 */}
+        <div className="mt-8 flex gap-4">
+          <Link
+            href="/dashboard"
+            className="rounded-lg bg-blue-600 px-6 py-3 font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          >
+            대시보드로 이동
+          </Link>
+          <Link
+            href="/portfolios"
+            className="rounded-lg border border-gray-300 bg-white px-6 py-3 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          >
+            포트폴리오 보기
+          </Link>
+        </div>
+
         <div className="mt-8 text-sm text-gray-500">
-          <p>Phase 1: 포트폴리오 관리 기능 개발 준비 완료</p>
+          <p>Phase 1: 포트폴리오 관리 UI 개발 진행 중</p>
         </div>
       </main>
     </div>
